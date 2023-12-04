@@ -1,21 +1,28 @@
 package com.example.backend.domain.services;
 
 import com.example.backend.domain.dto.MessageDTO;
+import com.example.backend.domain.dto.TicketDTO;
+import com.example.backend.domain.entities.Client;
 import com.example.backend.domain.entities.Ticket;
 
-import java.util.Collection;
+import java.util.List;
 
 public interface ITicketService {
+    List<Ticket> findByProductVersionId(Long productVersionId);
 
-    public Collection<Ticket> getTickets();
+    Ticket createTicket(TicketDTO ticket);
 
-    public Ticket createTicket(Ticket ticket);
+    List<Ticket> getTickets();
 
-    public Ticket getTicketById(Long id);
+    Ticket getTicketById(Long id);
 
-    public void saveTicket(Ticket ticket);
+    Ticket save(Ticket ticket);
 
-    public MessageDTO deleteTicketById(Long id);
+    Ticket updateTicket(Ticket ticket, Long id);
+
+    MessageDTO deleteTicketById(Long id);
+
+    //public Client getClientByTicketId(Long id);
 
    // public void associateTask(Long ticketId, Long taskId);
 }

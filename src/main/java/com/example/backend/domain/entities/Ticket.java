@@ -1,9 +1,9 @@
 package com.example.backend.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +12,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Ticket {
     @Id
@@ -19,9 +21,9 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
-    private Long versionId;
-
-    private Long CUITClient;
+    @ManyToOne
+    @JoinColumn(name = "product_version_id")
+    private ProductVersion productVersion;
 
     private String title;
 
@@ -29,22 +31,26 @@ public class Ticket {
 
     private String state;
 
-    private Date creationDate;
+    private String client;
 
-    private int severity;
+    @CreationTimestamp
+    @Column(name = "creationDate")
+    private Date createdAt;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ticket_task",
-            joinColumns = @JoinColumn(name = "ticket_id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id"))
-    private List<Task> listLinkedTasks = new ArrayList<>();
+    @UpdateTimestamp
+    @Column(name = "updateDate")
+    private Date updatedAt;
 
-    public List<Task> getListLinkedTasks() {
-        return listLinkedTasks;
-    }
+    private String severity;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    //Comentarios, historial de comentarios
+
+    @ElementCollection
+    @CollectionTable(
+            name="task",
+            joinColumns=@JoinColumn(name="ticket_id")
+    )
+    @Column(name="task_id")
+    private List<Long> listLinkedTasks = new ArrayList<>();
+
 }

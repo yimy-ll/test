@@ -1,9 +1,10 @@
 package com.example.backend.domain.services;
 
 import com.example.backend.domain.dto.MessageDTO;
-import com.example.backend.domain.entities.Task;
-import com.example.backend.domain.handlers.NotFoundException;
+import com.example.backend.domain.entities.Ticket;
 import com.example.backend.domain.repositories.TaskRepository;
+import com.example.backend.domain.handlers.NotFoundException;
+import com.example.backend.domain.entities.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class TaskService implements ITaskService{
     @Autowired
     TaskRepository taskRepository;
+
 
     @Override
     public Collection<Task> getTasks() {
@@ -36,8 +38,14 @@ public class TaskService implements ITaskService{
     }
 
     @Override
-    public void saveTask(Task task) {
-        taskRepository.save(task);
+    public Task save(Task task) {
+        return taskRepository.save(task);
+    }
+
+    @Override
+    public Task updateTask(Task task, Long id) {
+        Task selectedTask = getTaskById(id);
+        return taskRepository.save(selectedTask);
     }
 
     @Override

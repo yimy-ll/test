@@ -1,17 +1,16 @@
 package com.example.backend.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Task {
     @Id
@@ -31,10 +30,7 @@ public class Task {
 
     //private int severity;
 
-    @ManyToMany(mappedBy = "listLinkedTasks")
-    private List<Ticket> listLinkedTickets = new ArrayList<>();
+    //@ManyToMany(mappedBy = "listLinkedTasks")
+    //private List<Ticket> listLinkedTickets = new ArrayList<>();
 
-    public List<Ticket> getListLinkedTickets() {
-        return listLinkedTickets;
-    }
 }
