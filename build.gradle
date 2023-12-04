@@ -33,7 +33,10 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+	///implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+
+	// https://mvnrepository.com/artifact/org.postgresql/postgresql
+	implementation group: 'org.postgresql', name: 'postgresql', version: '42.1.4'
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
