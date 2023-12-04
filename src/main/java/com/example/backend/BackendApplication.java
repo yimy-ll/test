@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -78,8 +79,8 @@ public class BackendApplication {
 	// ------------------------------------------PRODUCT VERSIONS--------------------------------------------------
 // ------------------------------------------------------------------------------------------------------------
 	@GetMapping("/products/{productId}/versions")
-	public Collection<ProductVersion> getProductVersions(@PathVariable Long productId) {
-		return productVersionService.getProductVersions(productId);
+	public List<ProductVersion> getProductVersions(@PathVariable Long productId) {
+		return List.of(ProductVersion.builder().productId(12L).name("Version 1.0.0").description("Version 1.0.0").build());
 	}
 
 	@GetMapping("/products/{productId}/versions/{id}")
